@@ -1,0 +1,50 @@
+{
+  "provisionedFrom": "/Users/nickd/Workspaces/AgentArchitect",
+  "kind": "project",
+  "team": "hardware-dev",
+  "teams": [
+    "hardware-dev",
+    "software-project",
+    "content-studio"
+  ],
+  "projectType": "software",
+  "projectName": "StoveIQ",
+  "agents": [
+    "dev-planning",
+    "dfm-test-engineer",
+    "firmware-engineer",
+    "legal",
+    "marketing",
+    "mcad-engineer",
+    "pcb-designer",
+    "podcast-audio-engineer",
+    "podcast-publisher",
+    "podcast-script-writer",
+    "podcast-show-notes",
+    "podcast-voice-producer",
+    "product-requirements",
+    "qa-strategy",
+    "sales",
+    "short-form-video",
+    "social-distributor",
+    "software-architecture",
+    "software-developer",
+    "supply-chain-manager",
+    "systems-engineer",
+    "ux-design",
+    "video-assembler",
+    "video-asset-generator",
+    "video-publisher",
+    "video-script-writer"
+  ],
+  "skills": [
+    "hardware-dev",
+    "software-project",
+    "content-studio"
+  ],
+  "mcp": [],
+  "adopted": true,
+  "provisionedAt": "2026-08-14",
+  "aaCommit": "5dd29842bd774ca61c5a95f53efa178f2bc91713",
+  "syncedAt": "2026-08-14"
+}
