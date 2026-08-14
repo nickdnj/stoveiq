@@ -13,7 +13,7 @@ This repo spans more than one discipline and is served by 3 teams. Route by what
 
 Pick the team that owns the tree you are editing. Work that crosses the boundary (an interface change, a protocol revision, a spec that binds both sides) starts with the team that owns the contract, which then hands off a briefing.
 
-The agents and skills under `.claude/` are **generated** from `/Users/nickd/Workspaces/AgentArchitect` — never edit them here. To change an agent: edit its source in the factory, then run `aa sync /Users/nickd/Workspaces/stoveiq-open`.
+The agents and skills under `.claude/` are **generated** from `/Users/nickd/Workspaces/AgentArchitect` — never edit them here. To change an agent: edit its source in the factory, then run `aa sync /Users/nickd/Workspaces/stoveiq`.
 <!-- AA:ROUTING:END -->
 
 ## Project Overview
