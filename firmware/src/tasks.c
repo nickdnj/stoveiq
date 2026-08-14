@@ -210,8 +210,8 @@ int tasks_stop(void)
 {
     s_running = false;
     pthread_cond_signal(&s_frame_queue.cond);
-    pthread_join(&s_sensor_thread, NULL);
-    pthread_join(&s_cooking_thread, NULL);
+    pthread_join(s_sensor_thread, NULL);
+    pthread_join(s_cooking_thread, NULL);
     sim_queue_destroy(&s_frame_queue);
     return 0;
 }
