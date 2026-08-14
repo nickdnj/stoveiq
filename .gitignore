@@ -45,3 +45,11 @@ firmware/sdkconfig.esp32s3
 video/*
 !video/scripts/
 !video/assemble_v1.py
+
+# KiCad per-user / editor artifacts — the project, schematic and layout are
+# tracked; local window state and autosaves are not.
+*.kicad_prl
+*-backups/
+*.kicad_pcb-bak
+*.kicad_sch-bak
+fp-info-cache
