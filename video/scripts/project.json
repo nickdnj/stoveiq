@@ -1,0 +1,48 @@
+{
+  "id": "stoveiq-build-demo",
+  "title": "I Built a $50 Thermal Cooking Coach (and it actually works)",
+  "topic": "StoveIQ open-source build and demo video for Hackaday/maker audience",
+  "video_type": "build-demo",
+  "channel": "vistter2",
+  "created": "2026-04-10",
+  "last_updated": "2026-04-10",
+  "status": "in-progress",
+  "phases": {
+    "setup": {"status": "complete"},
+    "research": {"status": "complete"},
+    "outline": {"status": "complete"},
+    "scripting": {"status": "complete"},
+    "storyboard": {"status": "complete"},
+    "storyboard_pptx": {"status": "complete"},
+    "storyboard_review": {"status": "pending"},
+    "audio": {"status": "pending"},
+    "visuals": {"status": "pending"},
+    "assembly": {"status": "pending"},
+    "metadata": {"status": "pending"},
+    "upload": {"status": "pending"},
+    "review": {"status": "pending"}
+  },
+  "settings": {
+    "target_length_minutes": 9,
+    "resolution": "1920x1080",
+    "fps": 30,
+    "narration_style": "mixed (voiceover + live on-camera)",
+    "tone": "casual maker energy, authentic, excited",
+    "audience": "makers, hobbyist cooks, Hackaday/DIY community",
+    "background_music": true,
+    "music_volume": 0.12,
+    "default_visual_style": "ken-burns-zoom",
+    "publish_to_youtube": true
+  },
+  "chapters": 6,
+  "scenes": 24,
+  "estimated_runtime_minutes": 9.0,
+  "word_count_narration": 1350,
+  "assets": {
+    "user_provided": 0,
+    "live_footage": 14,
+    "ai_generated": 4,
+    "screen_capture": 5,
+    "title_card": 1
+  }
+}

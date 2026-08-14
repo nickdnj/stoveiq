@@ -36,3 +36,12 @@ firmware/sdkconfig.esp32s3
 .claude/agents/*.md
 .claude/skills/*/SKILL.md
 .claude/settings.local.json
+
+# Video production media — ~424MB of renders, narration and music beds.
+# Too big for a public repo, and all of it is re-derivable from the script
+# and storyboard, which stay tracked. Ignored: assembly/, audio/, output/,
+# and assets/ (AI-generated stills). Un-ignore assets/ if the cut should be
+# reproducible straight from a clone.
+video/*
+!video/scripts/
+!video/assemble_v1.py
