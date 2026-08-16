@@ -17,7 +17,7 @@ mkdir -p "$CERT_DIR"
 
 # --- Cert parameters (edit SAN list if your local IPs differ) ---
 CN="stoveiq.local"
-SAN="DNS:stoveiq.local,DNS:*.local,DNS:localhost,IP:192.168.1.183,IP:192.168.4.1,IP:127.0.0.1"
+SAN="DNS:stoveiq.local,DNS:*.local,DNS:localhost,IP:192.168.86.22,IP:192.168.4.1,IP:127.0.0.1"
 DAYS=3650
 
 openssl req -x509 -nodes \

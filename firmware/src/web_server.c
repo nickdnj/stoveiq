@@ -492,6 +492,10 @@ static const char FALLBACK_HTML[] =
 "sendCmd({cmd:'set_emissivity',value:v})}\n"
 /* Thermal data (used by calibration overlay only) */
 "let temps=new Float32Array(768);\n"
+/* False until the first binary frame lands. A freshly-allocated temps array is
+   all zeros, and rendering that yields a solid black rectangle that looks
+   exactly like a dead sensor — so don't draw the heatmap until it's real. */
+"let haveFrame=false;\n"
 /* Audio alert */
 "let audioCtx;\n"
 "function beep(){return;try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();"
@@ -611,6 +615,12 @@ static const char FALLBACK_HTML[] =
 "      /* Binary thermal frame — store for calibration overlay only */\n"
 "      const dv=new DataView(e.data);\n"
 "      for(let i=0;i<768;i++)temps[i]=dv.getInt16(4+i*2,true)/10.0;\n"
+"      haveFrame=true;\n"
+/* Repaint the calibration heatmap on every frame. Without this the overlay
+   only redrew on user interaction, so you were aiming the camera using a
+   frozen snapshot taken whenever you last tapped something. */
+"      const calOvl=document.getElementById('calOverlay');\n"
+"      if(calOvl&&calOvl.style.display==='block')drawCal();\n"
 "    }\n"
 "  };\n"
 "}\n"
@@ -705,8 +715,8 @@ static const char FALLBACK_HTML[] =
 "\n"
 "function drawCal(){\n"
 "  if(!calOx)return;\n"
-"  /* Draw heatmap */\n"
-"  if(temps.length===768){\n"
+"  /* Draw heatmap (only once real sensor data has arrived) */\n"
+"  if(haveFrame){\n"
 "    let mn=9999,mx=-9999;\n"
 "    for(let i=0;i<768;i++){if(temps[i]<mn)mn=temps[i];if(temps[i]>mx)mx=temps[i]}\n"
 "    const range=mx-mn||1;\n"
@@ -717,6 +727,12 @@ static const char FALLBACK_HTML[] =
 "    }\n"
 "    calOffCx.putImageData(calImg,0,0);\n"
 "    calCx.drawImage(calOffCv,0,0,256,192);\n"
+"  }else{\n"
+"    calCx.fillStyle='#111';calCx.fillRect(0,0,256,192);\n"
+"    calCx.fillStyle='#f59e0b';calCx.font='13px system-ui';calCx.textAlign='center';\n"
+"    calCx.fillText('Waiting for sensor data...',128,90);\n"
+"    calCx.fillStyle='#888';calCx.font='11px system-ui';\n"
+"    calCx.fillText('check the connection dot in the header',128,110);\n"
 "  }\n"
 "  /* Draw circles */\n"
 "  calOx.clearRect(0,0,320,240);\n"
