@@ -3941,7 +3941,7 @@
 		(descr "USB 2.0 Type C Receptacle, GCT, 16P, top mounted, horizontal, 5A, https://gct.co/files/drawings/usb4110.pdf")
 		(tags "USB 2.0 C Type-C Receptacle SMD 16P 16C USB4110-GF-A")
 		(property "Reference" "J1"
-			(at 201 -9 0)
+			(at 0 -5 0)
 			(layer "F.SilkS")
 			(uuid "4654aba9-c381-4de4-adb7-763ff458ac14")
 			(effects
@@ -3951,7 +3951,7 @@
 			)
 		)
 		(property "Value" "USB-C"
-			(at 201 -9 0)
+			(at 0 -5 0)
 			(layer "F.Fab")
 			(uuid "502d8836-fd13-4cc0-9fce-54951c67437f")
 			(effects
@@ -3961,7 +3961,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 201 -9 0)
+			(at 0 -5 0)
 			(layer "F.Fab")
 			(uuid "65844139-c861-4756-b958-2284e602a349")
 			(effects
@@ -3971,7 +3971,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 201 -9 0)
+			(at 0 -5 0)
 			(layer "F.Fab")
 			(uuid "8d4188bf-e63b-4ae4-a682-cb772d6cfab7")
 			(effects
@@ -4440,7 +4440,7 @@
 			(uuid "de4d064d-3427-4ad8-b3e4-2367f7809760")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_GCT_USB4110.step"
+		(model "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -4598,7 +4598,7 @@
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R7"
-			(at 214.699869 -6.761967 0)
+			(at 0 -1.17 0)
 			(layer "F.SilkS")
 			(uuid "d22574a4-ec97-4768-9ef7-2205d0225ea6")
 			(effects
@@ -4608,7 +4608,7 @@
 			)
 		)
 		(property "Value" "1k"
-			(at 214.699869 -6.761967 0)
+			(at 0 -1.17 0)
 			(layer "F.Fab")
 			(uuid "203ef62d-184b-40dc-ac53-6bcd1d7216f3")
 			(effects
@@ -4618,7 +4618,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 214.699869 -6.761967 0)
+			(at 0 -1.17 0)
 			(layer "F.Fab")
 			(uuid "209f4ec5-34df-41c6-84b8-0e507510437c")
 			(effects
@@ -4628,7 +4628,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 214.699869 -6.761967 0)
+			(at 0 -1.17 0)
 			(layer "F.Fab")
 			(uuid "6be84769-21c6-4a24-9e5e-afdb9bd43863")
 			(effects
@@ -4638,7 +4638,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 214.699869 -6.761967 0)
+			(at 0 -1.17 0)
 			(layer "F.Fab")
 			(uuid "0876268e-daad-4397-9e2d-017e315f4a00")
 			(effects
@@ -5275,7 +5275,7 @@
 			(uuid "21a310f1-6c45-429d-a308-da95ec840426")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-39-4_Window.step"
+		(model "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_THT.3dshapes/TO-39-3_Window.step"
 			(offset
 				(xyz 0 0 0)
 			)

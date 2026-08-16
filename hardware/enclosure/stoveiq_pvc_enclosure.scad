@@ -373,11 +373,14 @@ module esp32_ghost() {
 // ============================================================
 
 if (SHOW_ASSEMBLY) {
-    // Show all parts in their assembled position
+    // Show all parts in their assembled position.
+    // Both halves are already modelled in their mated positions — sensor_half()
+    // occupies -Y and esp32_half() occupies +Y, sharing the split plane at Y=0
+    // and the same Z axis. They need no transform. (An earlier version flipped
+    // the ESP32 half 180 degrees about X, which sent it to negative Z and left
+    // the two halves floating apart in the assembly render.)
     sensor_half();
-    translate([0, 0, 0]) rotate([180, 0, 0])
-        translate([0, -PIPE_OD, 0])
-            esp32_half();
+    esp32_half();
     translate([0, 0, -CAP_T]) end_cap(vented=false);
     translate([0, 0, PIPE_L]) end_cap(vented=false);
     if (SHOW_COMPONENTS) {
