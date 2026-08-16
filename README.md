@@ -14,8 +14,6 @@ An ESP32-S3 + MLX90640 thermal camera that turns any stove into a smart cooktop.
 > repo -- see [Project History](#project-history). It is not a product, it is not for sale,
 > and there is no roadmap to either.
 
-> **Follow the build:** [YouTube Build Series](https://youtube.com/@vistter) | [Hackaday.io Build Log](https://hackaday.io/) *(project page coming soon)* | [GitHub Source](https://github.com/nickdnj/stoveiq)
-
 ## What it looks like
 
 <table>
@@ -351,7 +349,7 @@ stoveiq/
   recipes/            # Community recipe JSON state machines + schema
   docs/
     images/           # UI screenshots used on this page
-  video/              # Build-series script, storyboard, assembly pipeline
+  video/              # Unproduced draft: script, storyboard, assembly pipeline
 ```
 
 Enclosure files are OpenSCAD/FreeCAD sources, not pre-sliced STLs -- render your own.
@@ -414,19 +412,3 @@ review criterion.
 ## Inspired By
 
 - [Combustion Inc](https://combustion.inc/) -- Smart cooking thermometer with predictive algorithms (internal meat temps via probe). StoveIQ provides the complementary view: surface thermal imaging of the entire cooktop from above.
-
----
-
-## Follow the Project
-
-| Platform | Link | What You'll Find |
-|----------|------|-----------------|
-| **GitHub** | [nickdnj/stoveiq](https://github.com/nickdnj/stoveiq) | Source code, hardware files, issues |
-| **YouTube** | [@vistter](https://youtube.com/@vistter) | Build videos, cooking demos, deep dives |
-| **Hackaday.io** | *(coming soon)* | Build log, community discussion |
-
-**Planned video series:**
-1. "I Built a $100 Thermal Cooking Coach (and it actually works)" -- launch overview + demo
-2. "Real-Time Thermal Imaging with ESP32" -- WebSocket streaming deep dive
-3. "Can an IR Camera Detect When Water Boils?" -- cooking science + algorithm
-4. "3D Printing a Parametric Enclosure in OpenSCAD" -- design + print process

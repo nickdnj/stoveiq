@@ -10,8 +10,8 @@ plausible four-burner cooktop over the firmware's own WebSocket protocol. The
 cookware library and the cook session are seeded fixtures.
 
 No photograph in this repository shows the physical device. The stills under
-`video/assets/` are AI-generated illustrations for the build series and are not
-hardware documentation.
+`video/assets/` are AI-generated illustrations from an unproduced video draft
+and are not hardware documentation.
 
 | File | Shows |
 |---|---|
