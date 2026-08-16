@@ -18,6 +18,13 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Cache PlatformIO
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-native-${{ runner.os }}-${{ hashFiles('firmware/platformio.ini') }}
+          restore-keys: pio-native-${{ runner.os }}-
+
       - name: Install PlatformIO
         run: pip install platformio
 
@@ -36,8 +43,24 @@ jobs:
         with:
           python-version: '3.11'
 
+      # The ESP-IDF toolchain is a few hundred MB and takes ~2 min to install.
+      # Keyed on platformio.ini so a version bump busts the cache.
+      - name: Cache PlatformIO
+        uses: actions/cache@v4
+        with:
+          path: ~/.platformio
+          key: pio-espidf-${{ runner.os }}-${{ hashFiles('firmware/platformio.ini') }}
+          restore-keys: pio-espidf-${{ runner.os }}-
+
       - name: Install PlatformIO
         run: pip install platformio
+
+      # src/certs.h holds the self-signed TLS cert and its private key, so it is
+      # .gitignore'd and absent from a fresh clone. web_server.c includes it
+      # unconditionally. Generate a throwaway pair for the build; it is never
+      # published and never leaves the runner.
+      - name: Generate TLS certificate
+        run: ./scripts/gen-cert.sh
 
       - name: Build ESP32-S3 firmware
         working-directory: firmware

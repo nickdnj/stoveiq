@@ -373,10 +373,18 @@ cd firmware
 pio test -e emulator
 ```
 
-> **Currently broken.** `test/test_integration.c` includes `safety_monitor.h`, a header
-> from the archived safety-product build that was never carried into this repo, so the
-> test binary fails to compile and takes the other two suites down with it. Deleting that
-> one file gets `test_sensor.c` and `test_cooking_engine.c` running again.
+23 tests across two suites -- `test/test_sensor/` (frame parsing, max/ambient extraction,
+emulator scenarios) and `test/test_cooking_engine/` (burner detection, state machine).
+
+### Building from a fresh clone
+
+The self-signed TLS certificate is not in the repo -- `firmware/src/certs.h` embeds a
+private key, so it is generated rather than committed. Run this once per clone before the
+first ESP32 build:
+
+```bash
+./scripts/gen-cert.sh
+```
 
 ### See the web UI without hardware
 

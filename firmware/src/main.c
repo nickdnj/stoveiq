@@ -116,6 +116,10 @@ static void run_threaded_demo(void)
     printf("Threaded demo complete.\n");
 }
 
+/* PlatformIO defines UNIT_TEST when building the test runners, which bring
+ * their own main() from Unity. Without this guard the emulator demo main()
+ * and the test main() collide at link time. */
+#ifndef UNIT_TEST
 int main(void)
 {
     printf("StoveIQ Open Source v%s (emulator)\n", STOVEIQ_FW_VERSION);
@@ -126,6 +130,7 @@ int main(void)
 
     return 0;
 }
+#endif /* !UNIT_TEST */
 
 /* ================================================================== */
 /*  ESP32-S3 entry point                                               */
