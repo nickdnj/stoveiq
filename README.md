@@ -16,6 +16,35 @@ An ESP32-S3 + MLX90640 thermal camera that turns any stove into a smart cooktop.
 
 > **Follow the build:** [YouTube Build Series](https://youtube.com/@vistter) | [Hackaday.io Build Log](https://hackaday.io/) *(project page coming soon)* | [GitHub Source](https://github.com/nickdnj/stoveiq)
 
+## What it looks like
+
+<table>
+<tr>
+<td width="33%"><img src="docs/images/ui-recipe.png" alt="Recipe coaching over live burner cards"></td>
+<td width="33%"><img src="docs/images/ui-calibration.png" alt="Thermal heatmap with burner zones"></td>
+<td width="33%"><img src="docs/images/ui-session.png" alt="Annotated cook session curve"></td>
+</tr>
+<tr>
+<td><b>Recipe coaching.</b> Steps advance on thermal triggers, not timers. Live burner cards underneath.</td>
+<td><b>Calibration.</b> The 768-pixel heatmap, bilinear-upscaled, with burner zones tapped onto it.</td>
+<td><b>Teaching mode.</b> A finished sear, replayed. The dips are the steak going in and the flip.</td>
+</tr>
+<tr>
+<td><img src="docs/images/ui-dashboard.png" alt="Burner dashboard"></td>
+<td><img src="docs/images/ui-cookware.png" alt="Cookware library"></td>
+<td><img src="docs/images/ui-settings.png" alt="Settings and sensor calibration"></td>
+</tr>
+<tr>
+<td><b>Dashboard.</b> Per-burner temperature, state, peak, and elapsed time.</td>
+<td><b>Cookware library.</b> Emissivity is a property of the pot, so the pot is a first-class object.</td>
+<td><b>Settings.</b> Alert thresholds and sensor calibration.</td>
+</tr>
+</table>
+
+Real UI, synthetic thermal data — regenerate with
+[`tools/ui-screenshots/`](tools/ui-screenshots/). Details and provenance in
+[`docs/images/`](docs/images/).
+
 ## Features
 
 - **Real-time thermal heatmap** -- 768-pixel IR view of your entire cooktop at 4Hz, bilinear-upscaled
@@ -41,8 +70,10 @@ An ESP32-S3 + MLX90640 thermal camera that turns any stove into a smart cooktop.
 | 1.5" Schedule 40 PVC pipe (enclosure) | ~$3 | Hardware store |
 
 MLX90640 modules run ~$25-35 on AliExpress, which brings the whole build closer to $50.
-A custom PCB that replaces the devkit is in [`hardware/pcb/`](hardware/pcb/) -- designed,
-not yet fabricated.
+
+A custom PCB meant to replace the devkit lives in [`hardware/pcb/`](hardware/pcb/), but it
+is a placement study rather than a board: it has no MCU on it, no routing, and 58 DRC
+violations. Build the devkit version. See [Hardware](#hardware) below.
 
 ### Wiring
 
@@ -125,6 +156,67 @@ The reason is emissivity: cast iron reads at ~0.95, polished stainless at ~0.05-
 global emissivity value is wrong for nearly every pot on the stove. Offsets are stored per
 (burner x cookware) pair and applied at display time only -- sessions keep raw temperatures so
 the data stays reinterpretable. See [`docs/phase1-cookware-teaching.md`](docs/phase1-cookware-teaching.md).
+
+---
+
+## Hardware
+
+All of it drawn in free and open-source tools -- KiCad for the board, OpenSCAD for the
+enclosure. Every image below is generated from source by
+[`hardware/render.sh`](hardware/render.sh), not exported by hand.
+
+### Enclosure -- built, and holding the thing up right now
+
+1.5" Schedule 40 PVC pipe split lengthwise. The lower half holds the MLX90640 behind a
+14mm window, the upper half holds the devkit, zip ties clamp them together, and the tube
+rotates inside a printed cradle so you can aim it and lock the angle.
+
+| Assembled tube | Cabinet bracket | Sensor half |
+|---|---|---|
+| ![Assembled enclosure](hardware/enclosure/renders/assembly.png) | ![Mounting bracket](hardware/enclosure/renders/bracket.png) | ![Sensor half](hardware/enclosure/renders/sensor-half.png) |
+
+Parametric, so you can re-cut it for your own cabinet before printing. Build guide:
+[`docs/enclosure-build.md`](docs/enclosure-build.md) · Models and dimensions:
+[`hardware/enclosure/`](hardware/enclosure/)
+
+### Custom PCB -- drawn, not finished
+
+A 45x35mm two-layer board to replace the devkit and breakout with one assembly.
+
+| Schematic | 3D | Top copper |
+|---|---|---|
+| ![Schematic](hardware/pcb/renders/schematic.png) | ![Board 3D](hardware/pcb/renders/board-iso.png) | ![Top layer](hardware/pcb/renders/layout-top.png) |
+
+That third image is the honest one: **there is not a single trace on this board.** The
+support circuitry is captured -- USB-C input, 3.3V regulation, the thermal sensor, an RGB
+status LED, a piezo buzzer, reset and boot buttons -- but the ESP32-S3 module was never
+placed, so every GPIO net dangles, and nothing is routed.
+
+| | |
+|---|---|
+| Schematic capture | Partial -- everything except the MCU |
+| Routing | None. 0 tracks, 0 vias |
+| DRC | 58 violations, including 2 shorts |
+| Fabricated | Never |
+
+Full accounting, BOM, and known issues: [`hardware/pcb/README.md`](hardware/pcb/README.md).
+If you want to finish it, the files are all here and the licence is permissive.
+
+### Built with
+
+| Tool | Licence | Used for |
+|---|---|---|
+| [KiCad](https://www.kicad.org/) 10 | GPL-3.0 | Schematic, layout, 3D raytracing, DRC, fab output |
+| [OpenSCAD](https://openscad.org/) | GPL-2.0 | Parametric enclosure modelling |
+| [FreeCAD](https://www.freecad.org/) | LGPL-2.1 | Alternative enclosure macro |
+| [Freerouting](https://freerouting.org/) | AGPL-3.0 | Autorouting attempt |
+| [PlatformIO](https://platformio.org/) + [ESP-IDF](https://github.com/espressif/esp-idf) | Apache-2.0 | Firmware build |
+| [librsvg](https://gitlab.gnome.org/GNOME/librsvg) | LGPL-2.1 | SVG to PNG for these images |
+
+```bash
+brew install kicad openscad librsvg   # or: apt install kicad openscad librsvg2-bin
+hardware/render.sh
+```
 
 ---
 
@@ -220,7 +312,8 @@ its UI off an ESP32 instead of an app store.
 Mounted over my stove and used for real cooking. Since the pivot it has grown recipe state
 machines, HTTPS so the phone's wake lock works, cookware-based calibration, and a teaching
 mode that captures labeled cook sessions -- a corpus for phase-aware calibration later. The
-KiCad board and enclosure models landed in August 2026 and remain unfabricated.
+KiCad board and enclosure models landed in August 2026. The enclosure is printed and in
+use; the board never got past component placement and has never been fabricated.
 
 ### Does it have economic value?
 
@@ -246,11 +339,18 @@ stoveiq/
     emulator/         # Desktop thermal emulator + scenarios
     lib/MLX90640/     # Melexis sensor driver
   hardware/
-    pcb/              # KiCad 9 project -- schematic, layout, fab outputs
-    enclosure/        # PVC pipe enclosure (OpenSCAD + FreeCAD macro)
-  enclosure/          # Earlier production enclosure model (reference only)
+    render.sh         # Regenerates every hardware image from source
+    pcb/              # KiCad 10 project -- schematic, layout, fab outputs
+      renders/        #   Generated: schematic, layer plots, 3D views
+    enclosure/        # PVC tube + wedge box (OpenSCAD, FreeCAD macro)
+      renders/        #   Generated: assembly, parts, bracket
+  enclosure/          # Byte-identical copy of hardware/enclosure/stoveiq_enclosure.scad,
+                      # kept so the old path still resolves
+  tools/
+    ui-screenshots/   # Runs the web UI on a desktop with synthetic thermal data
   recipes/            # Community recipe JSON state machines + schema
-  docs/               # Build guide, enclosure assembly, design docs
+  docs/
+    images/           # UI screenshots used on this page
   video/              # Build-series script, storyboard, assembly pipeline
 ```
 
@@ -273,6 +373,24 @@ pio run -e emulator
 ```bash
 cd firmware
 pio test -e emulator
+```
+
+> **Currently broken.** `test/test_integration.c` includes `safety_monitor.h`, a header
+> from the archived safety-product build that was never carried into this repo, so the
+> test binary fails to compile and takes the other two suites down with it. Deleting that
+> one file gets `test_sensor.c` and `test_cooking_engine.c` running again.
+
+### See the web UI without hardware
+
+The interface is embedded in the firmware as a C string, and the emulator build excludes
+`web_server.c` -- so there is normally no way to look at the UI without flashing a board.
+[`tools/ui-screenshots/`](tools/ui-screenshots/) extracts it and serves it locally against
+a synthetic thermal feed that speaks the firmware's real WebSocket protocol.
+
+```bash
+cd tools/ui-screenshots
+pip install aiohttp
+python3 extract.py && python3 server.py --recipe   # http://127.0.0.1:8770
 ```
 
 ## Contributing
