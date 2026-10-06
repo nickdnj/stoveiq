@@ -35,7 +35,8 @@
     "video-assembler",
     "video-asset-generator",
     "video-publisher",
-    "video-script-writer"
+    "video-script-writer",
+    "wiki-ingest"
   ],
   "skills": [
     "hardware-dev",
@@ -45,6 +46,6 @@
   "mcp": [],
   "adopted": true,
   "provisionedAt": "2026-08-14",
-  "aaCommit": "a0e136b234185f2b17b70e5040df36c41d3deb2a",
-  "syncedAt": "2026-08-14"
+  "aaCommit": "0969395ce937edc59bf5aafb8f4d7275ba1162ef",
+  "syncedAt": "2026-10-06"
 }
