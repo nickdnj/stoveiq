@@ -13,6 +13,8 @@ This repo spans more than one discipline and is served by 3 teams. Route by what
 
 Pick the team that owns the tree you are editing. Work that crosses the boundary (an interface change, a protocol revision, a spec that binds both sides) starts with the team that owns the contract, which then hands off a briefing.
 
+A question that asks for a decision or a recommendation in one of these areas goes to that team, even when every fact is in the request and the answer looks obvious. Do not answer it yourself, and do not call specialist agents directly unless the user names one. The one exception: a code change the user has already specified on an established codebase (a bug fix, a small edit) can be handled inline.
+
 The agents and skills under `.claude/` are **generated** from `/Users/nickd/Workspaces/AgentArchitect` — never edit them here. To change an agent: edit its source in the factory, then run `aa sync /Users/nickd/Workspaces/stoveiq`.
 <!-- AA:ROUTING:END -->
 
